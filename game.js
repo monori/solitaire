@@ -616,6 +616,9 @@ function setupDragAndDrop(cardElement, sourceType, pileIndex, cardIndex) {
             window.dragOffsetY = e.clientY - rect.top;
         }
         
+        // Store the original z-index before modifying it
+        cardElement.dataset.originalZIndex = cardElement.style.zIndex || getComputedStyle(cardElement).zIndex || '30';
+        
         // Set drag source information
         draggedElement = cardElement;
         dragSourcePile = { type: sourceType, index: pileIndex, cardIndex };
@@ -623,7 +626,8 @@ function setupDragAndDrop(cardElement, sourceType, pileIndex, cardIndex) {
         console.log('Drag start:', {
             type: sourceType,
             pileIndex,
-            cardIndex
+            cardIndex,
+            originalZIndex: cardElement.dataset.originalZIndex
         });
         
         // If dragging from tableau, get all cards below this one
@@ -668,11 +672,22 @@ function setupDragAndDrop(cardElement, sourceType, pileIndex, cardIndex) {
     cardElement.addEventListener('dragend', () => {
         cardElement.classList.remove('dragging');
         
-        // Reset z-index to its original value for all card types
-        cardElement.style.zIndex = '';
+        // Restore the original z-index that was stored at drag start
+        if (cardElement.dataset.originalZIndex) {
+            cardElement.style.zIndex = cardElement.dataset.originalZIndex;
+            // Clean up the stored value
+            delete cardElement.dataset.originalZIndex;
+        } else {
+            // Fallback - restore to CSS default
+            cardElement.style.zIndex = '';
+        }
         
         // Remove stack preview
         removeStackPreview();
+        
+        // Check if this was an invalid move that needs a re-render
+        // We need to wait a frame for the browser's drag behavior to complete
+        const needsRerender = draggedCards.length > 0 && dragSourcePile !== null;
         
         // Reset drag state
         draggedElement = null;
@@ -682,6 +697,13 @@ function setupDragAndDrop(cardElement, sourceType, pileIndex, cardIndex) {
         // Reset drag offset
         window.dragOffsetX = undefined;
         window.dragOffsetY = undefined;
+        
+        // Force a re-render after invalid drags to ensure proper positioning
+        if (needsRerender) {
+            setTimeout(() => {
+                renderGameState();
+            }, 10);
+        }
     });
     
     // Add click handler for double-click auto-move to foundation
@@ -749,10 +771,11 @@ function createStackPreview(sourceCard, cards, startIndex) {
         
         // Hide all cards from the dragged card to the end of the pile
         for (let i = dragSourcePile.cardIndex; i < cardElements.length; i++) {
-            // Store the card and its original opacity
+            // Store the card and its original properties
             window.hiddenCards.push({
                 element: cardElements[i],
-                originalOpacity: cardElements[i].style.opacity || '1'
+                originalOpacity: cardElements[i].style.opacity || '1',
+                originalZIndex: cardElements[i].style.zIndex || ''
             });
             
             // Hide the card by setting opacity to 0
@@ -787,13 +810,24 @@ function removeStackPreview() {
         previewContainer.remove();
     }
     
-    // Restore opacity of any hidden cards
+    // Restore opacity and z-index of any hidden cards
     if (window.hiddenCards && window.hiddenCards.length > 0) {
-        window.hiddenCards.forEach(card => {
-            if (card.element && card.element.style) {
-                card.element.style.opacity = card.originalOpacity || '1';
+        window.hiddenCards.forEach((cardInfo, index) => {
+            if (cardInfo.element && cardInfo.element.style) {
+                // Restore opacity
+                cardInfo.element.style.opacity = cardInfo.originalOpacity || '1';
+                
+                // Restore original z-index or calculate proper z-index based on card position
+                if (cardInfo.originalZIndex) {
+                    cardInfo.element.style.zIndex = cardInfo.originalZIndex;
+                } else if (dragSourcePile && dragSourcePile.type === 'tableau') {
+                    const cardIndex = dragSourcePile.cardIndex + index;
+                    cardInfo.element.style.zIndex = (30 + cardIndex).toString();
+                }
             }
         });
+        
+        // Clear the hidden cards array
         window.hiddenCards = [];
     }
     
