@@ -1,0 +1,74 @@
+{
+    "name": "Gratis Online Kabale - Klassisk Klondike",
+    "short_name": "Kabale",
+    "description": "Spil klassisk Klondike Kabale online eller offline. Gem dit fremskridt og følg dine statistikker!",
+    "start_url": "/da/",
+    "display": "standalone",
+    "background_color": "#2c8a43",
+    "theme_color": "#2c8a43",
+    "orientation": "any",
+    "scope": "/",
+    "lang": "da",
+    "categories": ["games", "entertainment"],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iOCIgZmlsbD0iIzJjOGE0MyIvPgo8cmVjdCB4PSIxMiIgeT0iMTIiIHdpZHRoPSIxMiIgaGVpZ2h0PSIxOCIgcng9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjMwIiB5PSIxMiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjE4IiByeD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iNDgiIHk9IjEyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTgiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIxMiIgeT0iNDIiIHdpZHRoPSIxMiIgaGVpZ2h0PSIxOCIgcng9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjMwIiB5PSI0MiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjE4IiByeD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iNDgiIHk9IjQyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTgiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+            "sizes": "72x72",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiMyYzhhNDMiLz4KPHJlY3QgeD0iMTYiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMjQiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI0MCIgeT0iMTYiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyNCIgcng9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjY0IiB5PSIxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI0IiByeD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMTYiIHk9IjU2IiB3aWR0aD0iMTYiIGhlaWdodD0iMjQiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI0MCIgeT0iNTYiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyNCIgcng9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjY0IiB5PSI1NiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI0IiByeD0iMiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==",
+            "sizes": "96x96",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiByeD0iMTYiIGZpbGw9IiMyYzhhNDMiLz4KPHJlY3QgeD0iMjAiIHk9IjIwIiB3aWR0aD0iMjAiIGhlaWdodD0iMzAiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI1NCIgeT0iMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMCIgcng9IjMiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9Ijg4IiB5PSIyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjMwIiByeD0iMyIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMjAiIHk9Ijc4IiB3aWR0aD0iMjAiIGhlaWdodD0iMzAiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI1NCIgeT0iNzgiIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMCIgcng9IjMiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9Ijg4IiB5PSI3OCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjMwIiByeD0iMyIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==",
+            "sizes": "128x128",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMyYzhhNDMiLz4KPHJlY3QgeD0iMzAiIHk9IjMwIiB3aWR0aD0iMzAiIGhlaWdodD0iNDUiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI4MSIgeT0iMzAiIHdpZHRoPSIzMCIgaGVpZ2h0PSI0NSIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjEzMiIgeT0iMzAiIHdpZHRoPSIzMCIgaGVpZ2h0PSI0NSIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjMwIiB5PSIxMTciIHdpZHRoPSIzMCIgaGVpZ2h0PSI0NSIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjgxIiB5PSIxMTciIHdpZHRoPSIzMCIgaGVpZ2h0PSI0NSIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjEzMiIgeT0iMTE3IiB3aWR0aD0iMzAiIGhlaWdodD0iNDUiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9IiMyYzhhNDMiLz4KPHJlY3QgeD0iODAiIHk9IjgwIiB3aWR0aD0iODAiIGhlaWdodD0iMTIwIiByeD0iMTAiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjIxNiIgeT0iODAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMzUyIiB5PSI4MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEyMCIgcng9IjEwIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI4MCIgeT0iMzEyIiB3aWR0aD0iODAiIGhlaWdodD0iMTIwIiByeD0iMTAiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjIxNiIgeT0iMzEyIiB3aWR0aD0iODAiIGhlaWdodD0iMTIwIiByeD0iMTAiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjM1MiIgeT0iMzEyIiB3aWR0aD0iODAiIGhlaWdodD0iMTIwIiByeD0iMTAiIGZpbGw9IndoaXRlIi8+PC9zdmc+Cg==",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Nyt Spil",
+            "short_name": "Nyt Spil",
+            "description": "Start et nyt kabale spil",
+            "url": "/da/?action=new",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiMyYzhhNDMiLz4KPHBhdGggZD0iTTQ4IDI0VjcyTTI0IDQ4SDcyIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "features": [
+        "offline-support",
+        "local-storage",
+        "bookmark-sync",
+        "pwa-install"
+    ],
+    "screenshots": [
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIHZpZXdCb3g9IjAgMCAxMjgwIDcyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iNzIwIiBmaWxsPSIjMmM4YTQzIi8+Cjx0ZXh0IHg9IjY0MCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCIgZm9udC1mYW1pbHk9IkFyaWFsIj5LYWJhbGUgU3BpbDwvdGV4dD4KPC9zdmc+",
+            "sizes": "1280x720",
+            "type": "image/svg+xml",
+            "form_factor": "wide"
+        }
+    ]
+} 

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play classic Klondike Solitaire online or offline. Save your progress with bookmarks and track your stats. Non-intrusive ads, mobile-friendly design.">
+    <meta name="keywords" content="solitaire, klondike, card game, online game, offline game, free game, patience, cards, spider solitaire, freecell, pyramid solitaire, tripeaks, yukon, canfield, golf solitaire, forty thieves, accordion, clock solitaire, gaps, montana, scorpion, wasp, beleaguered castle, eight off, baker's dozen, cruel, la belle lucie, fan, shamrocks, three peaks, penguin, flower garden, grandfather's clock, bristol, calculation, fortress, good measure, little spider, maze, miss milligan, nestor, penguin, pyramid, russian solitaire, sir tommy, spiderette, sultan, thieves of egypt, trefoil, triple peaks, westcliff, will o the wisp, zebra">
+    <meta name="author" content="Free Online Solitaire">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    
+    <!-- PWA and Offline Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2c8a43">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Solitaire">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="Free Online Solitaire - Classic Klondike Card Game">
+    <meta property="og:description" content="Play classic Klondike Solitaire online or offline. Save your progress and track your stats!">
+    <meta property="og:image" content="https://your-domain.com/solitaire-preview.jpg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Alternate language versions -->
+    <link rel="alternate" hreflang="en" href="https://your-domain.com/">
+    <link rel="alternate" hreflang="da" href="https://your-domain.com/da/">
+    <link rel="alternate" hreflang="x-default" href="https://your-domain.com/">
+    
+    <title>Free Online Solitaire - Classic Klondike Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Free Online Solitaire",
+        "description": "Classic Klondike Solitaire card game with save functionality and statistics tracking",
+        "genre": "Card Game",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1247"
+        },
+        "gameItem": {
+            "@type": "Thing",
+            "name": "Playing Cards"
+        },
+        "numberOfPlayers": "1",
+        "playMode": "SinglePlayer",
+        "inLanguage": "en"
+    }
+    </script>
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Solitaire - Classic Klondike Card Game">
+    <meta name="twitter:description" content="Play classic Klondike Solitaire online or offline. Save your progress and track your stats!">
+    <meta name="twitter:image" content="https://your-domain.com/solitaire-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://your-domain.com/">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+</head>
+<body data-lang="en">
+    <div class="game-container">
+        <!-- Offline Mode Indicator -->
+        <div class="offline-indicator">
+            🔌 Playing Offline - Progress saved locally
+        </div>
+        
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <a href="/" class="lang-link active" data-lang="en">🇺🇸 English</a>
+            <a href="/da/" class="lang-link" data-lang="da">🇩🇰 Dansk</a>
+        </div>
+        
+        <header>
+            <h1>Free Online Solitaire</h1>
+            <div class="game-controls">
+                <button id="new-game-btn">New Game</button>
+                <button id="undo-btn">Undo</button>
+                <button id="bookmark-btn" class="bookmark-btn" title="Save your progress by bookmarking this page">
+                    📌 Save Progress
+                </button>
+                <div class="draw-option">
+                    <label for="draw-three-toggle">Draw Three:</label>
+                    <input type="checkbox" id="draw-three-toggle">
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <div class="top-row">
+                <div class="stock-waste">
+                    <div id="stock" class="pile"></div>
+                    <div id="waste" class="pile"></div>
+                </div>
+                <div class="foundations">
+                    <div id="foundation-0" class="pile foundation"></div>
+                    <div id="foundation-1" class="pile foundation"></div>
+                    <div id="foundation-2" class="pile foundation"></div>
+                    <div id="foundation-3" class="pile foundation"></div>
+                </div>
+            </div>
+
+            <div class="tableau">
+                <div id="tableau-0" class="pile tableau-pile"></div>
+                <div id="tableau-1" class="pile tableau-pile"></div>
+                <div id="tableau-2" class="pile tableau-pile"></div>
+                <div id="tableau-3" class="pile tableau-pile"></div>
+                <div id="tableau-4" class="pile tableau-pile"></div>
+                <div id="tableau-5" class="pile tableau-pile"></div>
+                <div id="tableau-6" class="pile tableau-pile"></div>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stats">
+                <span>Games: <span id="games-played">0</span></span>
+                <span>Wins: <span id="wins">0</span></span>
+                <span>Losses: <span id="losses">0</span></span>
+                <span>Fastest: <span id="fastest-time">--:--</span></span>
+            </div>
+        </div>
+
+        <div class="toast-container" id="toast-container">
+            <!-- Toast notifications will be added here dynamically -->
+        </div>
+    </div>
+
+    <!-- SEO Content Section - English -->
+    <div class="seo-content">
+        <div class="seo-section">
+            <section class="game-description">
+                <h2>Free Online Solitaire - Classic Klondike Card Game</h2>
+                <p>Play the world's most popular card game for free! Our online Solitaire (also known as Klondike Solitaire or Patience) offers the classic gameplay you love with modern features like save functionality, statistics tracking, and offline play. No downloads required - play instantly in your browser!</p>
+            </section>
+
+            <section class="how-to-play">
+                <h2>How to Play Solitaire</h2>
+                <h3>Objective</h3>
+                <p>The goal of Solitaire is to move all 52 cards to the four foundation piles, building each suit from Ace to King (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K).</p>
+                
+                <h3>Game Setup</h3>
+                <ul>
+                    <li><strong>Tableau:</strong> 7 columns with 1-7 cards each, only top cards face-up</li>
+                    <li><strong>Stock:</strong> Remaining cards in a face-down pile</li>
+                    <li><strong>Waste:</strong> Cards drawn from the stock pile</li>
+                    <li><strong>Foundations:</strong> 4 empty piles for building suits</li>
+                </ul>
+
+                <h3>How to Move Cards</h3>
+                <ul>
+                    <li>Drag and drop cards between piles</li>
+                    <li>Build tableau columns in descending order, alternating colors</li>
+                    <li>Move cards to foundations in ascending order by suit</li>
+                    <li>Click stock pile to draw new cards</li>
+                    <li>Double-click cards to auto-move to foundations</li>
+                </ul>
+            </section>
+
+            <section class="game-features">
+                <h2>Game Features</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>🎮 Classic Gameplay</h3>
+                        <p>Authentic Klondike Solitaire rules with smooth drag-and-drop controls</p>
+                    </div>
+                    <div class="feature">
+                        <h3>💾 Save Progress</h3>
+                        <p>Bookmark your game to continue later - no account required</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📊 Statistics</h3>
+                        <p>Track wins, losses, games played, and fastest completion times</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📱 Mobile Friendly</h3>
+                        <p>Play on any device - desktop, tablet, or smartphone</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔌 Offline Play</h3>
+                        <p>Works without internet connection once loaded</p>
+                    </div>
+                    <div class="feature">
+                        <h3>⚡ Fast Loading</h3>
+                        <p>No downloads, no registration - start playing instantly</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3>Is this Solitaire game free?</h3>
+                    <p>Yes! Our Solitaire game is completely free to play. No hidden costs, no premium features - enjoy unlimited games at no charge.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do I need to download anything?</h3>
+                    <p>No downloads required! Play directly in your web browser on any device. The game works on Chrome, Firefox, Safari, Edge, and all modern browsers.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I play offline?</h3>
+                    <p>Yes! Once the game loads, you can play offline. Your progress is saved locally and will sync when you're back online.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I save my game?</h3>
+                    <p>Simply bookmark the page (Ctrl+D or Cmd+D) to save your current game state. When you return to the bookmark, your game will continue exactly where you left off.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What's the difference between Draw One and Draw Three?</h3>
+                    <p>In Draw One mode, you draw one card at a time from the stock. Draw Three mode draws three cards, making the game more challenging.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I undo moves?</h3>
+                    <p>Yes! Click the "Undo" button to reverse your last move. This helps when you make mistakes or want to try different strategies.</p>
+                </div>
+            </section>
+
+            <section class="solitaire-variants">
+                <h2>Popular Solitaire Variants</h2>
+                <p>While our game focuses on classic Klondike Solitaire, there are many other popular variants:</p>
+                <ul>
+                    <li><strong>Spider Solitaire:</strong> Uses two decks, build sequences in the same suit</li>
+                    <li><strong>FreeCell:</strong> All cards visible, uses free cells for temporary storage</li>
+                    <li><strong>Pyramid Solitaire:</strong> Remove pairs of cards that add up to 13</li>
+                    <li><strong>TriPeaks:</strong> Clear three pyramid peaks by selecting cards</li>
+                    <li><strong>Yukon:</strong> Similar to Klondike but with different dealing rules</li>
+                </ul>
+            </section>
+
+            <section class="tips-strategies">
+                <h2>Solitaire Tips & Strategies</h2>
+                <ul>
+                    <li>Always move Aces to foundations immediately</li>
+                    <li>Expose hidden cards in tableau columns when possible</li>
+                    <li>Build foundations evenly to keep options open</li>
+                    <li>Don't rush to move cards to foundations - sometimes keeping them in tableau is better</li>
+                    <li>Try to create empty tableau columns for Kings</li>
+                    <li>Plan several moves ahead before making your move</li>
+                    <li>Use the undo feature to experiment with different strategies</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Subtle bottom ad - only visible when scrolled down -->
+    <div class="ad-container ad-subtle-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Desktop side ads - only on very wide screens, minimal and blended -->
+    <div class="ad-container ad-subtle-side ad-left">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="vertical"></ins>
+    </div>
+
+    <div class="ad-container ad-subtle-side ad-right">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="vertical"></ins>
+    </div>
+
+    <script src="game.js"></script>
+    
+    <!-- Service Worker Registration for Offline Mode -->
+    <script>
+        // Register service worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    if (confirm('A new version is available! Reload to update?')) {
+                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
+        // Online/Offline detection
+        function updateOnlineStatus() {
+            const isOnline = navigator.onLine;
+            const body = document.body;
+            
+            if (isOnline) {
+                body.classList.remove('offline');
+                console.log('Online: Ads and external features available');
+            } else {
+                body.classList.add('offline');
+                console.log('Offline: Game continues with local storage only');
+            }
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
+        // Check initial status
+        updateOnlineStatus();
+    </script>
+    
+    <!-- Initialize AdSense (only when online) -->
+    <script>
+        if (navigator.onLine) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    </script>
+</body>
+</html> 

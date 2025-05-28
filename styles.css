@@ -1,0 +1,854 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2c8a43; /* Classic card table green */
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 0; /* Base layer */
+}
+
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+    position: relative;
+    z-index: 10; /* Game elements above background */
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    z-index: 15; /* Header above game container */
+}
+
+h1 {
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.game-controls button {
+    background-color: #fff;
+    color: #2c8a43;
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.game-controls button:hover {
+    background-color: #f0f0f0;
+}
+
+.bookmark-btn {
+    background-color: #4CAF50 !important;
+    color: white !important;
+    border: 2px solid #45a049 !important;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.bookmark-btn:hover {
+    background-color: #45a049 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bookmark-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.bookmark-btn.saved {
+    background-color: #2196F3 !important;
+    border-color: #1976D2 !important;
+    animation: bookmarkSaved 0.6s ease;
+}
+
+.install-btn {
+    background-color: #FF9800 !important;
+    color: white !important;
+    border: 2px solid #F57C00 !important;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.install-btn:hover {
+    background-color: #F57C00 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.install-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.install-btn.installing {
+    background-color: #4CAF50 !important;
+    border-color: #45a049 !important;
+    animation: installing 1s ease infinite;
+}
+
+@keyframes installing {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bookmarkSaved {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.draw-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 15px;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.draw-option input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+/* Game Area */
+.game-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 20; /* Game area above header */
+    flex: 1;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.stock-waste {
+    display: flex;
+    gap: 20px;
+}
+
+#waste {
+    position: relative;
+    min-width: 100px; /* Ensure there's enough space for multiple cards */
+    overflow: visible; /* Allow cards to overflow for the staggered effect */
+}
+
+.foundations {
+    display: flex;
+    gap: 10px;
+}
+
+.tableau {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Card Piles */
+.pile {
+    width: 100px;
+    height: 140px;
+    border-radius: 8px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 20; /* Piles above game container */
+}
+
+.tableau-pile {
+    min-height: 300px; /* Taller to accommodate stacked cards */
+}
+
+/* Cards */
+.card {
+    width: 100px;
+    height: 140px;
+    border-radius: 8px;
+    background-color: #fff;
+    position: absolute;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    user-select: none;
+    z-index: 30; /* Cards above piles, incremented in tableau */
+}
+
+.card.red {
+    color: #d40000;
+}
+
+.card.black {
+    color: #000;
+}
+
+.card.face-down {
+    background-color: #1a6b30;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 5px;
+}
+
+.card-top, .card-bottom {
+    display: flex;
+    align-items: center;
+}
+
+.card-bottom {
+    transform: rotate(180deg);
+}
+
+.card-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+/* Dragging */
+.card.dragging {
+    z-index: 1000; /* Single dragged cards above all static elements */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    cursor: grabbing;
+}
+
+.card.stack-preview {
+    position: absolute;
+    pointer-events: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Stack Preview Container */
+#stack-preview-container {
+    position: fixed;
+    pointer-events: none;
+    z-index: 2000;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Stats */
+.stats-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9rem;
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+
+.toast {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    animation: fadeIn 0.3s ease-in, fadeOut 0.3s ease-out 3.7s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100%); }
+}
+
+/* Non-Intrusive Ad Containers */
+.ad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+/* Subtle bottom ad - blends with background */
+.ad-subtle-bottom {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    max-width: 728px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Subtle side ads - only on very wide screens, minimal design */
+.ad-subtle-side {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 400px;
+    z-index: 5; /* Below game elements */
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(3px);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    display: none; /* Hidden by default */
+}
+
+.ad-subtle-side:hover {
+    opacity: 1;
+}
+
+.ad-left {
+    left: 20px;
+}
+
+.ad-right {
+    right: 20px;
+}
+
+/* AdSense Responsive */
+.adsbygoogle {
+    display: block;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Only show side ads on very wide screens where they won't interfere */
+@media (min-width: 1600px) {
+    .ad-subtle-side {
+        display: flex;
+    }
+    
+    .game-container {
+        margin: 0 auto;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .game-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .pile {
+        width: 80px;
+        height: 112px;
+    }
+
+    .card {
+        width: 80px;
+        height: 112px;
+    }
+
+    /* Ensure side ads are hidden on smaller screens */
+    .ad-subtle-side {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .top-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .tableau {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pile {
+        width: 70px;
+        height: 98px;
+    }
+
+    .card {
+        width: 70px;
+        height: 98px;
+    }
+
+    .stats {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .game-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .game-controls button {
+        margin-left: 0;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .install-btn {
+        margin-left: 0 !important;
+        order: -1; /* Show install button first on mobile */
+    }
+
+    /* Make bottom ad more subtle on mobile */
+    .ad-subtle-bottom {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 10px;
+    }
+
+    .pile {
+        width: 60px;
+        height: 84px;
+    }
+
+    .card {
+        width: 60px;
+        height: 84px;
+    }
+
+    .card-center {
+        font-size: 1.5rem;
+    }
+
+    .tableau {
+        gap: 5px;
+    }
+
+    .foundations {
+        gap: 5px;
+    }
+
+    .stock-waste {
+        gap: 10px;
+    }
+
+    /* Minimal bottom ad on very small screens */
+    .ad-subtle-bottom {
+        margin-top: 15px;
+        padding: 8px;
+        background-color: rgba(255, 255, 255, 0.02);
+        border: none;
+    }
+}
+
+/* Offline Mode Styles */
+.offline-indicator {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff9800;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 10001;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+.offline .offline-indicator {
+    display: block;
+}
+
+.offline .ad-container {
+    display: none !important;
+}
+
+.offline header::after {
+    content: "🔌 Offline Mode";
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    background-color: rgba(255, 152, 0, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced offline experience */
+.offline .bookmark-btn {
+    background-color: #9E9E9E !important;
+    border-color: #757575 !important;
+}
+
+.offline .bookmark-btn:hover {
+    background-color: #757575 !important;
+}
+
+/* Offline toast styling */
+.offline .toast {
+    border-left: 4px solid #ff9800;
+}
+
+/* SEO Content Styles */
+.seo-content {
+    background-color: #fff;
+    color: #333;
+    margin-top: 40px;
+    padding: 0;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seo-section {
+    padding: 40px;
+    line-height: 1.6;
+}
+
+.seo-section h2 {
+    color: #2c8a43;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #2c8a43;
+    padding-bottom: 10px;
+}
+
+.seo-section h3 {
+    color: #1a6b30;
+    font-size: 1.4rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.seo-section p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.seo-section ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.seo-section li {
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+}
+
+/* Game Description Section */
+.game-description {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-left: 5px solid #2c8a43;
+}
+
+.game-description h2 {
+    border: none;
+    margin-bottom: 15px;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.feature {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #2c8a43;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.feature p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+/* FAQ Section */
+.faq {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.faq-item {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.faq-item h3 {
+    color: #2c8a43;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.faq-item p {
+    margin-bottom: 0;
+    color: #555;
+}
+
+/* How to Play Section */
+.how-to-play {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.how-to-play ul {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Tips and Strategies */
+.tips-strategies {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    border: 1px solid #c3e6c3;
+}
+
+.tips-strategies ul {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Solitaire Variants */
+.solitaire-variants {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    border: 1px solid #dee2e6;
+}
+
+.solitaire-variants ul {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.solitaire-variants strong {
+    color: #2c8a43;
+}
+
+/* Responsive Design for SEO Content */
+@media (max-width: 768px) {
+    .seo-section {
+        padding: 20px;
+    }
+    
+    .seo-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .seo-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .feature {
+        padding: 15px;
+    }
+    
+    .game-description,
+    .faq,
+    .how-to-play,
+    .tips-strategies,
+    .solitaire-variants {
+        padding: 20px;
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .seo-section {
+        padding: 15px;
+    }
+    
+    .seo-section h2 {
+        font-size: 1.4rem;
+    }
+    
+    .seo-section h3 {
+        font-size: 1.1rem;
+    }
+    
+    .seo-section p,
+    .seo-section li {
+        font-size: 1rem;
+    }
+}
+
+/* Language Switcher */
+.language-switcher {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+}
+
+.lang-link {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.lang-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lang-link.active {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #2c8a43;
+    font-weight: 600;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.lang-link.active:hover {
+    background-color: rgba(255, 255, 255, 1);
+    color: #1a6b30;
+} 

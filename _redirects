@@ -1,0 +1,9 @@
+# Cloudflare Redirects Configuration
+
+# Language-based redirects
+# Redirect Danish users to Danish version based on Accept-Language header
+/ /da/ 302 Language=da
+/ /da/ 302 Country=DK
+
+# Fallback for any unmatched routes
+/* /index.html 200 

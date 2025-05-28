@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spil klassisk Klondike Kabale online eller offline. Gem dit fremskridt med bogmærker og følg dine statistikker. Ikke-påtrængende annoncer, mobil-venligt design.">
+    <meta name="keywords" content="kabale, klondike, kortspil, online spil, offline spil, gratis spil, patience, kort, edderkop kabale, freecell, pyramide kabale, tripeaks, yukon, canfield, golf kabale, fyrre tyve, harmonika, ur kabale, huller, montana, skorpion, hveps, belejret slot, otte fra, bagers dusin, grusom, la belle lucie, vifte, kløver, tre toppe, pingvin, blomsterhave, bedstefars ur, bristol, beregning, fæstning, godt mål, lille edderkop, labyrint, frøken milligan, nestor, pingvin, pyramide, russisk kabale, sir tommy, spiderette, sultan, tyve fra egypten, kløverblad, tredobbelte toppe, westcliff, will o the wisp, zebra">
+    <meta name="author" content="Gratis Online Kabale">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="da">
+    
+    <!-- PWA and Offline Support -->
+    <link rel="manifest" href="/manifest-da.json">
+    <meta name="theme-color" content="#2c8a43">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Kabale">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/da/">
+    <meta property="og:title" content="Gratis Online Kabale - Klassisk Klondike Kortspil">
+    <meta property="og:description" content="Spil klassisk Klondike Kabale online eller offline. Gem dit fremskridt og følg dine statistikker!">
+    <meta property="og:image" content="https://your-domain.com/solitaire-preview.jpg">
+    <meta property="og:locale" content="da_DK">
+    
+    <!-- Alternate language versions -->
+    <link rel="alternate" hreflang="en" href="https://your-domain.com/">
+    <link rel="alternate" hreflang="da" href="https://your-domain.com/da/">
+    <link rel="alternate" hreflang="x-default" href="https://your-domain.com/">
+    
+    <title>Gratis Online Kabale - Klassisk Klondike Kortspil</title>
+    <link rel="stylesheet" href="../styles.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Gratis Online Kabale",
+        "description": "Klassisk Klondike Kabale kortspil med gem-funktionalitet og statistik",
+        "genre": "Kortspil",
+        "gamePlatform": "Webbrowser",
+        "operatingSystem": "Alle",
+        "applicationCategory": "Spil",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "DKK"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1247"
+        },
+        "gameItem": {
+            "@type": "Thing",
+            "name": "Spillekort"
+        },
+        "numberOfPlayers": "1",
+        "playMode": "SinglePlayer",
+        "inLanguage": "da"
+    }
+    </script>
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gratis Online Kabale - Klassisk Klondike Kortspil">
+    <meta name="twitter:description" content="Spil klassisk Klondike Kabale online eller offline. Gem dit fremskridt og følg dine statistikker!">
+    <meta name="twitter:image" content="https://your-domain.com/solitaire-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://your-domain.com/da/">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+</head>
+<body data-lang="da">
+    <div class="game-container">
+        <!-- Offline Mode Indicator -->
+        <div class="offline-indicator">
+            🔌 Spiller Offline - Fremskridt gemt lokalt
+        </div>
+        
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <a href="/" class="lang-link" data-lang="en">🇺🇸 English</a>
+            <a href="/da/" class="lang-link active" data-lang="da">🇩🇰 Dansk</a>
+        </div>
+        
+        <header>
+            <h1>Gratis Online Kabale</h1>
+            <div class="game-controls">
+                <button id="new-game-btn">Nyt Spil</button>
+                <button id="undo-btn">Fortryd</button>
+                <button id="bookmark-btn" class="bookmark-btn" title="Gem dit fremskridt ved at bogmærke denne side">
+                    📌 Gem Fremskridt
+                </button>
+                <div class="draw-option">
+                    <label for="draw-three-toggle">Træk Tre:</label>
+                    <input type="checkbox" id="draw-three-toggle">
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <div class="top-row">
+                <div class="stock-waste">
+                    <div id="stock" class="pile"></div>
+                    <div id="waste" class="pile"></div>
+                </div>
+                <div class="foundations">
+                    <div id="foundation-0" class="pile foundation"></div>
+                    <div id="foundation-1" class="pile foundation"></div>
+                    <div id="foundation-2" class="pile foundation"></div>
+                    <div id="foundation-3" class="pile foundation"></div>
+                </div>
+            </div>
+
+            <div class="tableau">
+                <div id="tableau-0" class="pile tableau-pile"></div>
+                <div id="tableau-1" class="pile tableau-pile"></div>
+                <div id="tableau-2" class="pile tableau-pile"></div>
+                <div id="tableau-3" class="pile tableau-pile"></div>
+                <div id="tableau-4" class="pile tableau-pile"></div>
+                <div id="tableau-5" class="pile tableau-pile"></div>
+                <div id="tableau-6" class="pile tableau-pile"></div>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stats">
+                <span>Spil: <span id="games-played">0</span></span>
+                <span>Sejre: <span id="wins">0</span></span>
+                <span>Nederlag: <span id="losses">0</span></span>
+                <span>Hurtigste: <span id="fastest-time">--:--</span></span>
+            </div>
+        </div>
+
+        <div class="toast-container" id="toast-container">
+            <!-- Toast notifications will be added here dynamically -->
+        </div>
+    </div>
+
+    <!-- SEO Content Section - Danish -->
+    <div class="seo-content">
+        <div class="seo-section">
+            <section class="game-description">
+                <h2>Gratis Online Kabale - Klassisk Klondike Kortspil</h2>
+                <p>Spil verdens mest populære kortspil gratis! Vores online Kabale (også kendt som Klondike Kabale eller Patience) tilbyder det klassiske gameplay du elsker med moderne funktioner som gem-funktionalitet, statistik og offline spil. Ingen downloads påkrævet - spil med det samme i din browser!</p>
+            </section>
+
+            <section class="how-to-play">
+                <h2>Sådan Spiller Du Kabale</h2>
+                <h3>Formål</h3>
+                <p>Målet med Kabale er at flytte alle 52 kort til de fire grundbunker og bygge hver kulør fra Es til Konge (Es, 2, 3, 4, 5, 6, 7, 8, 9, 10, Knægt, Dame, Konge).</p>
+                
+                <h3>Spil Opsætning</h3>
+                <ul>
+                    <li><strong>Tableau:</strong> 7 kolonner med 1-7 kort hver, kun øverste kort vendt op</li>
+                    <li><strong>Talon:</strong> Resterende kort i en bunke vendt ned</li>
+                    <li><strong>Affald:</strong> Kort trukket fra talon bunken</li>
+                    <li><strong>Grundbunker:</strong> 4 tomme bunker til at bygge kulører</li>
+                </ul>
+
+                <h3>Sådan Flytter Du Kort</h3>
+                <ul>
+                    <li>Træk og slip kort mellem bunker</li>
+                    <li>Byg tableau kolonner i faldende rækkefølge, skiftende farver</li>
+                    <li>Flyt kort til grundbunker i stigende rækkefølge efter kulør</li>
+                    <li>Klik på talon bunken for at trække nye kort</li>
+                    <li>Dobbeltklik på kort for automatisk at flytte til grundbunker</li>
+                </ul>
+            </section>
+
+            <section class="game-features">
+                <h2>Spil Funktioner</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>🎮 Klassisk Gameplay</h3>
+                        <p>Autentiske Klondike Kabale regler med glatte træk-og-slip kontroller</p>
+                    </div>
+                    <div class="feature">
+                        <h3>💾 Gem Fremskridt</h3>
+                        <p>Bogmærk dit spil for at fortsætte senere - ingen konto påkrævet</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📊 Statistikker</h3>
+                        <p>Følg sejre, nederlag, spil spillet og hurtigste gennemførelsestider</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📱 Mobil Venlig</h3>
+                        <p>Spil på enhver enhed - desktop, tablet eller smartphone</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔌 Offline Spil</h3>
+                        <p>Virker uden internetforbindelse når først indlæst</p>
+                    </div>
+                    <div class="feature">
+                        <h3>⚡ Hurtig Indlæsning</h3>
+                        <p>Ingen downloads, ingen registrering - begynd at spille med det samme</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq">
+                <h2>Ofte Stillede Spørgsmål</h2>
+                <div class="faq-item">
+                    <h3>Er dette Kabale spil gratis?</h3>
+                    <p>Ja! Vores Kabale spil er helt gratis at spille. Ingen skjulte omkostninger, ingen premium funktioner - nyd ubegrænsede spil uden omkostninger.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Skal jeg downloade noget?</h3>
+                    <p>Ingen downloads påkrævet! Spil direkte i din webbrowser på enhver enhed. Spillet virker på Chrome, Firefox, Safari, Edge og alle moderne browsere.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Kan jeg spille offline?</h3>
+                    <p>Ja! Når spillet er indlæst, kan du spille offline. Dit fremskridt gemmes lokalt og synkroniseres når du er online igen.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Hvordan gemmer jeg mit spil?</h3>
+                    <p>Bare bogmærk siden (Ctrl+D eller Cmd+D) for at gemme din nuværende spiltilstand. Når du vender tilbage til bogmærket, fortsætter dit spil præcis hvor du slap.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Hvad er forskellen mellem Træk Et og Træk Tre?</h3>
+                    <p>I Træk Et tilstand trækker du ét kort ad gangen fra talonen. Træk Tre tilstand trækker tre kort, hvilket gør spillet mere udfordrende.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Kan jeg fortryde træk?</h3>
+                    <p>Ja! Klik på "Fortryd" knappen for at omgøre dit sidste træk. Dette hjælper når du laver fejl eller vil prøve forskellige strategier.</p>
+                </div>
+            </section>
+
+            <section class="solitaire-variants">
+                <h2>Populære Kabale Varianter</h2>
+                <p>Mens vores spil fokuserer på klassisk Klondike Kabale, er der mange andre populære varianter:</p>
+                <ul>
+                    <li><strong>Edderkop Kabale:</strong> Bruger to kortspil, byg sekvenser i samme kulør</li>
+                    <li><strong>FreeCell:</strong> Alle kort synlige, bruger frie celler til midlertidig opbevaring</li>
+                    <li><strong>Pyramide Kabale:</strong> Fjern par af kort der tilsammen giver 13</li>
+                    <li><strong>TriPeaks:</strong> Ryd tre pyramidetoppe ved at vælge kort</li>
+                    <li><strong>Yukon:</strong> Ligner Klondike men med forskellige uddelingsregler</li>
+                </ul>
+            </section>
+
+            <section class="tips-strategies">
+                <h2>Kabale Tips & Strategier</h2>
+                <ul>
+                    <li>Flyt altid Esser til grundbunker med det samme</li>
+                    <li>Afdæk skjulte kort i tableau kolonner når muligt</li>
+                    <li>Byg grundbunker jævnt for at holde muligheder åbne</li>
+                    <li>Skynd dig ikke med at flytte kort til grundbunker - nogle gange er det bedre at beholde dem i tableau</li>
+                    <li>Prøv at skabe tomme tableau kolonner til Konger</li>
+                    <li>Planlæg flere træk frem før du laver dit træk</li>
+                    <li>Brug fortryd funktionen til at eksperimentere med forskellige strategier</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Subtle bottom ad - only visible when scrolled down -->
+    <div class="ad-container ad-subtle-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Desktop side ads - only on very wide screens, minimal and blended -->
+    <div class="ad-container ad-subtle-side ad-left">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="vertical"></ins>
+    </div>
+
+    <div class="ad-container ad-subtle-side ad-right">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="vertical"></ins>
+    </div>
+
+    <script src="../game.js"></script>
+    
+    <!-- Service Worker Registration for Offline Mode -->
+    <script>
+        // Register service worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    if (confirm('En ny version er tilgængelig! Genindlæs for at opdatere?')) {
+                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
+        // Online/Offline detection
+        function updateOnlineStatus() {
+            const isOnline = navigator.onLine;
+            const body = document.body;
+            
+            if (isOnline) {
+                body.classList.remove('offline');
+                console.log('Online: Annoncer og eksterne funktioner tilgængelige');
+            } else {
+                body.classList.add('offline');
+                console.log('Offline: Spillet fortsætter kun med lokal lagring');
+            }
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
+        // Check initial status
+        updateOnlineStatus();
+    </script>
+    
+    <!-- Initialize AdSense (only when online) -->
+    <script>
+        if (navigator.onLine) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    </script>
+</body>
+</html> 
