@@ -415,10 +415,15 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    .game-container {
+        padding: 0;
+    }
+
     header {
         flex-direction: column;
         gap: 10px;
         text-align: center;
+        padding: 10px;
     }
 
     .top-row {
@@ -428,23 +433,34 @@ h1 {
     }
 
     .tableau {
-        flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 4px;
+        overflow-x: auto;
+        padding: 0;
     }
 
     .pile {
-        width: 70px;
-        height: 98px;
+        width: 54px;
+        height: 76px;
+        flex-shrink: 0;
     }
 
     .card {
-        width: 70px;
-        height: 98px;
+        width: 54px;
+        height: 76px;
+    }
+
+    .card-center {
+        font-size: 1.2rem;
     }
 
     .stats {
         flex-wrap: wrap;
         gap: 10px;
+    }
+
+    .stats-container {
+        padding: 10px;
     }
 
     h1 {
@@ -478,33 +494,35 @@ h1 {
 
 @media (max-width: 480px) {
     .game-container {
-        padding: 10px;
+        padding: 0;
     }
 
     .pile {
-        width: 60px;
-        height: 84px;
+        width: 48px;
+        height: 67px;
+        flex-shrink: 0;
     }
 
     .card {
-        width: 60px;
-        height: 84px;
+        width: 48px;
+        height: 67px;
     }
 
     .card-center {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
     }
 
     .tableau {
-        gap: 5px;
+        gap: 3px;
+        padding: 0;
     }
 
     .foundations {
-        gap: 5px;
+        gap: 3px;
     }
 
     .stock-waste {
-        gap: 10px;
+        gap: 6px;
     }
 
     /* Minimal bottom ad on very small screens */
@@ -513,6 +531,39 @@ h1 {
         padding: 8px;
         background-color: rgba(255, 255, 255, 0.02);
         border: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .game-container {
+        padding: 0;
+    }
+
+    .pile {
+        width: 44px;
+        height: 62px;
+    }
+
+    .card {
+        width: 44px;
+        height: 62px;
+    }
+
+    .card-center {
+        font-size: 1rem;
+    }
+
+    .tableau {
+        gap: 2px;
+        padding: 0;
+    }
+
+    .foundations {
+        gap: 2px;
+    }
+
+    .stock-waste {
+        gap: 4px;
     }
 }
 
@@ -812,9 +863,10 @@ h1 {
 
 /* Language Switcher */
 .language-switcher {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 8px;
     z-index: 100;
