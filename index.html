@@ -33,9 +33,6 @@
     <title>Free Online Solitaire - Classic Klondike Card Game</title>
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -284,7 +281,222 @@
              data-ad-format="vertical"></ins>
     </div>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" rel="noopener">Contact</a>
+                <a href="#" id="cookie-settings">Cookie Settings</a>
+            </div>
+            <div class="footer-text">
+                <p>&copy; 2024 Free Solitaire Original. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h3>🍪 Support our free game with ads?</h3>
+                <p>We don't use any cookies by default! Only if you choose to support us with non-intrusive ads, we'll set cookies for AdSense. Otherwise, enjoy the game completely cookie-free!</p>
+            </div>
+            <div class="cookie-buttons">
+                <button id="cookie-accept-all" class="cookie-btn cookie-accept">Support Us - Show Ads</button>
+                <button id="cookie-settings-btn" class="cookie-btn cookie-settings">Customize</button>
+                <button id="cookie-reject" class="cookie-btn cookie-reject">Play Ad-Free</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookie-modal" class="cookie-modal">
+        <div class="cookie-modal-content">
+            <div class="cookie-modal-header">
+                <h2>Cookie Settings</h2>
+                <button id="cookie-modal-close" class="cookie-close">&times;</button>
+            </div>
+            <div class="cookie-modal-body">
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h3>Advertising Cookies</h3>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" id="advertising-cookies">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p>Enable this to show non-intrusive ads that support our free game. We only set cookies if you choose ads - otherwise the game runs completely cookie-free!</p>
+                </div>
+            </div>
+            <div class="cookie-modal-footer">
+                <button id="cookie-save-settings" class="cookie-btn cookie-accept">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
     <script src="game.js"></script>
+    
+    <!-- Cookie Management Script -->
+    <script>
+        // Cookie consent management
+        class CookieManager {
+            constructor() {
+                this.cookieSettings = this.loadSettings();
+                this.init();
+            }
+            
+            init() {
+                // Show banner if no consent given yet
+                if (!this.cookieSettings.consentGiven) {
+                    this.showBanner();
+                }
+                
+                // Initialize based on current settings
+                this.applySettings();
+                this.bindEvents();
+            }
+            
+            loadSettings() {
+                const stored = localStorage.getItem('cookieSettings');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+                return {
+                    consentGiven: false,
+                    advertising: false
+                };
+            }
+            
+            saveSettings() {
+                localStorage.setItem('cookieSettings', JSON.stringify(this.cookieSettings));
+            }
+            
+            showBanner() {
+                const banner = document.getElementById('cookie-banner');
+                banner.classList.add('show');
+            }
+            
+            hideBanner() {
+                const banner = document.getElementById('cookie-banner');
+                banner.classList.remove('show');
+            }
+            
+            showModal() {
+                const modal = document.getElementById('cookie-modal');
+                modal.classList.add('show');
+                
+                // Update toggle states
+                document.getElementById('advertising-cookies').checked = this.cookieSettings.advertising;
+            }
+            
+            hideModal() {
+                const modal = document.getElementById('cookie-modal');
+                modal.classList.remove('show');
+            }
+            
+            acceptAll() {
+                this.cookieSettings = {
+                    consentGiven: true,
+                    advertising: true
+                };
+                this.saveSettings();
+                this.applySettings();
+                this.hideBanner();
+            }
+            
+            rejectNonEssential() {
+                this.cookieSettings = {
+                    consentGiven: true,
+                    advertising: false
+                };
+                this.saveSettings();
+                this.applySettings();
+                this.hideBanner();
+            }
+            
+            saveCustomSettings() {
+                this.cookieSettings = {
+                    consentGiven: true,
+                    advertising: document.getElementById('advertising-cookies').checked
+                };
+                this.saveSettings();
+                this.applySettings();
+                this.hideModal();
+                this.hideBanner();
+            }
+            
+            applySettings() {
+                // Load AdSense only if advertising cookies are accepted
+                if (this.cookieSettings.advertising && navigator.onLine) {
+                    this.loadAdSense();
+                } else {
+                    this.hideAds();
+                }
+            }
+            
+            loadAdSense() {
+                // Only load if not already loaded
+                if (!window.adsbygoogle) {
+                    // Load AdSense script
+                    const script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX';
+                    script.crossOrigin = 'anonymous';
+                    document.head.appendChild(script);
+                    
+                    script.onload = () => {
+                        // Initialize ads
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                        
+                        // Show ad containers
+                        document.querySelectorAll('.ad-container').forEach(ad => {
+                            ad.style.display = 'flex';
+                        });
+                    };
+                }
+            }
+            
+            hideAds() {
+                // Hide all ad containers
+                document.querySelectorAll('.ad-container').forEach(ad => {
+                    ad.style.display = 'none';
+                });
+            }
+            
+            bindEvents() {
+                // Banner buttons
+                document.getElementById('cookie-accept-all').addEventListener('click', () => this.acceptAll());
+                document.getElementById('cookie-reject').addEventListener('click', () => this.rejectNonEssential());
+                document.getElementById('cookie-settings-btn').addEventListener('click', () => this.showModal());
+                
+                // Footer cookie settings link
+                document.getElementById('cookie-settings').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showModal();
+                });
+                
+                // Modal buttons
+                document.getElementById('cookie-modal-close').addEventListener('click', () => this.hideModal());
+                document.getElementById('cookie-save-settings').addEventListener('click', () => this.saveCustomSettings());
+                
+                // Close modal when clicking outside
+                document.getElementById('cookie-modal').addEventListener('click', (e) => {
+                    if (e.target.id === 'cookie-modal') {
+                        this.hideModal();
+                    }
+                });
+            }
+        }
+        
+        // Initialize cookie manager when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CookieManager();
+        });
+    </script>
     
     <!-- Service Worker Registration for Offline Mode -->
     <script>
@@ -335,15 +547,6 @@
         
         // Check initial status
         updateOnlineStatus();
-    </script>
-    
-    <!-- Initialize AdSense (only when online) -->
-    <script>
-        if (navigator.onLine) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
     </script>
 </body>
 </html> 
