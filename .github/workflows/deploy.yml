@@ -35,4 +35,21 @@ jobs:
           
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4
+        
+      - name: Clear Cloudflare Cache
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          # Clear cache for both domains
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
+          
+          # If you have a separate zone for the Danish domain, uncomment and configure:
+          # curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID_DA }}/purge_cache" \
+          #   -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+          #   -H "Content-Type: application/json" \
+          #   --data '{"purge_everything":true}'
+          
+          echo "✅ Cloudflare cache cleared successfully" 
