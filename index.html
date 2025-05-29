@@ -502,6 +502,22 @@
             loadAdSense() {
                 // Only load if not already loaded
                 if (!window.adsbygoogle) {
+                    // Ensure ad containers are visible and have dimensions first
+                    const adContainers = document.querySelectorAll('.ad-container');
+                    let hasValidContainer = false;
+                    
+                    adContainers.forEach(container => {
+                        if (container.offsetWidth > 0) {
+                            hasValidContainer = true;
+                        }
+                    });
+                    
+                    // If no valid containers, wait and retry
+                    if (!hasValidContainer) {
+                        setTimeout(() => this.loadAdSense(), 500);
+                        return;
+                    }
+                    
                     // Load AdSense script
                     const script = document.createElement('script');
                     script.async = true;
@@ -510,15 +526,39 @@
                     document.head.appendChild(script);
                     
                     script.onload = () => {
-                        // Initialize ads
-                        (window.adsbygoogle = window.adsbygoogle || []).push({});
-                        (window.adsbygoogle = window.adsbygoogle || []).push({});
-                        (window.adsbygoogle = window.adsbygoogle || []).push({});
-                        
-                        // Show ad containers
-                        document.querySelectorAll('.ad-container').forEach(ad => {
-                            ad.style.display = 'flex';
-                        });
+                        // Wait a moment for containers to be fully ready
+                        setTimeout(() => {
+                            try {
+                                // Initialize ads with error handling
+                                const adElements = document.querySelectorAll('.adsbygoogle');
+                                adElements.forEach(ad => {
+                                    if (ad.parentElement.offsetWidth > 0) {
+                                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                                    }
+                                });
+                                
+                                // Show ad containers
+                                document.querySelectorAll('.ad-container').forEach(ad => {
+                                    ad.style.display = 'flex';
+                                });
+                            } catch (error) {
+                                console.log('AdSense initialization delayed - retrying...');
+                                // Retry after a longer delay if there's an error
+                                setTimeout(() => {
+                                    try {
+                                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                                    } catch (retryError) {
+                                        console.log('AdSense failed to initialize after retry');
+                                    }
+                                }, 1000);
+                            }
+                        }, 100);
+                    };
+                    
+                    script.onerror = () => {
+                        console.log('AdSense script failed to load');
                     };
                 }
             }
