@@ -320,132 +320,29 @@ h1 {
     to { opacity: 0; transform: translateX(100%); }
 }
 
-/* Non-Intrusive Ad Containers */
-.ad-section {
-    background-color: #2c8a43; /* Same as main game background */
-    padding: 20px 0;
-    margin: 20px 0;
-    border-radius: 0;
-    min-height: 1px; /* Ensure section always has some height */
-}
-
-.ad-container {
+/* Donation Container */
+.donation-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    border-radius: 8px;
-    padding: 5px;
-    min-height: 100px; /* Ensure minimum height for AdSense */
-    min-width: 100px; /* Ensure minimum width for AdSense */
-}
-
-/* Subtle bottom ad - blends with background */
-.ad-subtle-bottom {
-    margin-top: 30px;
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    max-width: 728px;
-    min-width: 320px; /* Minimum width for AdSense */
-    min-height: 100px; /* Minimum height for AdSense */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Subtle side ads - only on very wide screens, minimal design */
-.ad-subtle-side {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 120px;
-    height: 400px;
-    min-width: 120px; /* Ensure consistent width */
-    min-height: 400px; /* Ensure consistent height */
-    z-index: 5; /* Below game elements */
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(3px);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    display: none; /* Hidden by default */
-}
-
-.ad-subtle-side:hover {
-    opacity: 1;
-}
-
-.ad-left {
-    left: 20px;
-}
-
-.ad-right {
-    right: 20px;
-}
-
-/* AdSense Responsive */
-.adsbygoogle {
-    display: block;
-    text-align: center;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Ad Placeholder Styling */
-.ad-placeholder {
-    background-color: rgba(255, 255, 255, 0.1); /* Light background */
-    border: 2px dashed rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-align: center;
     padding: 20px;
-    min-height: 90px;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    margin: 20px 0;
 }
 
-.ad-placeholder:hover {
-    opacity: 1;
-    background-color: rgba(255, 255, 255, 0.15);
+.donation-container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Different sizes for different ad containers */
-.ad-subtle-bottom .ad-placeholder {
-    min-height: 100px;
-    width: 100%;
-    max-width: 728px;
+.donation-container input[type="image"] {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
-.ad-subtle-side .ad-placeholder {
-    min-height: 250px;
-    width: 100%;
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-    font-size: 0.8rem;
-}
-
-/* Hide placeholder when real ads are loaded */
-.ad-container:has(.adsbygoogle[data-ad-status="filled"]) .ad-placeholder {
-    display: none;
-}
-
-/* Only show side ads on very wide screens where they won't interfere */
-@media (min-width: 1600px) {
-    .ad-subtle-side {
-        display: flex;
-    }
-    
-    .game-container {
-        margin: 0 auto;
-    }
+.donation-container input[type="image"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */
@@ -465,20 +362,11 @@ h1 {
         height: 112px;
     }
 
-    /* Ensure side ads are hidden on smaller screens */
-    .ad-subtle-side {
-        display: none !important;
-    }
 }
 
 @media (max-width: 768px) {
     .game-container {
         padding: 10px;
-    }
-
-    .ad-section {
-        padding: 15px 0;
-        margin: 15px 0;
     }
 
     header {
@@ -546,22 +434,11 @@ h1 {
         order: -1; /* Show install button first on mobile */
     }
 
-    /* Make bottom ad more subtle on mobile */
-    .ad-subtle-bottom {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: rgba(255, 255, 255, 0.03);
-    }
 }
 
 @media (max-width: 480px) {
     .game-container {
         padding: 8px;
-    }
-
-    .ad-section {
-        padding: 10px 0;
-        margin: 10px 0;
     }
 
     .pile {
@@ -592,13 +469,6 @@ h1 {
         gap: 6px;
     }
 
-    /* Minimal bottom ad on very small screens */
-    .ad-subtle-bottom {
-        margin-top: 15px;
-        padding: 8px;
-        background-color: rgba(255, 255, 255, 0.02);
-        border: none;
-    }
 }
 
 @media (max-width: 360px) {
@@ -653,10 +523,6 @@ h1 {
 
 .offline .offline-indicator {
     display: block;
-}
-
-.offline .ad-container {
-    display: none !important;
 }
 
 .offline header::after {
@@ -1059,297 +925,3 @@ h1 {
         min-width: 120px;
     }
 }
-
-/* Cookie Banner & Modal Styles */
-.cookie-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #1a6b30 0%, #2c8a43 100%);
-    color: white;
-    padding: 20px;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-    z-index: 10000;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    border-top: 3px solid #45a049;
-}
-
-.cookie-banner.show {
-    transform: translateY(0);
-}
-
-.cookie-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.cookie-text h3 {
-    margin: 0 0 8px 0;
-    font-size: 1.2rem;
-    color: white;
-}
-
-.cookie-text p {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    opacity: 0.95;
-}
-
-.cookie-buttons {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.cookie-btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.cookie-accept {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.cookie-accept:hover {
-    background-color: #45a049;
-    transform: translateY(-1px);
-}
-
-.cookie-settings {
-    background-color: transparent;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-.cookie-settings:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: white;
-}
-
-.cookie-reject {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.cookie-reject:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Cookie Modal */
-.cookie-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 10001;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.cookie-modal.show {
-    display: flex;
-}
-
-.cookie-modal-content {
-    background: white;
-    border-radius: 12px;
-    max-width: 600px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.cookie-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid #eee;
-}
-
-.cookie-modal-header h2 {
-    margin: 0;
-    color: #2c8a43;
-    font-size: 1.4rem;
-}
-
-.cookie-close {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #666;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-}
-
-.cookie-close:hover {
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-.cookie-modal-body {
-    padding: 24px;
-}
-
-.cookie-category {
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.cookie-category:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.cookie-category-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.cookie-category h3 {
-    margin: 0;
-    color: #1a6b30;
-    font-size: 1.1rem;
-}
-
-.cookie-category p {
-    margin: 0;
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-/* Cookie Toggle Switch */
-.cookie-toggle {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-    cursor: pointer;
-}
-
-.cookie-toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.toggle-slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 24px;
-    transition: 0.3s;
-}
-
-.toggle-slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-
-.cookie-toggle input:checked + .toggle-slider {
-    background-color: #4CAF50;
-}
-
-.cookie-toggle input:checked + .toggle-slider:before {
-    transform: translateX(26px);
-}
-
-.cookie-toggle input:disabled + .toggle-slider {
-    background-color: #4CAF50;
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.cookie-modal-footer {
-    padding: 20px 24px;
-    border-top: 1px solid #eee;
-    text-align: right;
-}
-
-/* Mobile Cookie Banner */
-@media (max-width: 768px) {
-    .cookie-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    
-    .cookie-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .cookie-btn {
-        width: 100%;
-        padding: 12px;
-    }
-    
-    .cookie-text h3 {
-        font-size: 1.1rem;
-    }
-    
-    .cookie-text p {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .cookie-banner {
-        padding: 15px;
-    }
-    
-    .cookie-modal {
-        padding: 10px;
-    }
-    
-    .cookie-modal-content {
-        max-height: 90vh;
-    }
-    
-    .cookie-modal-header,
-    .cookie-modal-body,
-    .cookie-modal-footer {
-        padding: 16px;
-    }
-} 
